@@ -9,6 +9,9 @@ import TaskForm from './components/TaskForm';
 import styles from './App.module.css'
 import TaskList from './components/TaskList';
 
+// Interface
+import { ITask } from "./interfaces/Task"
+
 function App() {
   return (
       <div>
