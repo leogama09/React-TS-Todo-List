@@ -1,10 +1,16 @@
 import React from 'react';
 
+// Components
+import Footer from './components/Footer';
+import Header from './components/Header';
+
 function App() {
   return (
-    <div className="App">
-      <h1>React + TS Todo List</h1>
-    </div>
+      <div>
+        <Header />
+        <h1>Conteúdo...</h1>
+        <Footer />
+      </div>
   );
 }
 
