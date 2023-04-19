@@ -57,7 +57,7 @@ function App() {
       <div>
         <Modal 
           children={<TaskForm 
-            btnText="Editar Tarefa" 
+            btnText="Edit Task" 
             taskList={taskList}
             task={taskToUpdate}
             handleUpdate={updateTask}
@@ -66,9 +66,9 @@ function App() {
         <Header />
         <main className={styles.main}>
         <div>
-          <h2>O que você vai fazer?</h2>
+          <h2>What will you do?</h2>
           <TaskForm 
-            btnText="Criar Tarefa" 
+            btnText="Create Task" 
             taskList={taskList}
             task={taskToUpdate}
             setTaskList={setTaskList} 
@@ -76,7 +76,7 @@ function App() {
 
         </div>
         <div>
-          <h2>Suas tarefas:</h2>
+          <h2>Your tasks:</h2>
           <TaskList 
             taskList={taskList} 
             handleDelete={deleteTask} 

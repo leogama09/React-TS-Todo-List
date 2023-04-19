@@ -20,7 +20,7 @@ const TaskList = ({taskList, handleDelete, handleEdit}: Props) => {
           <div key={task.id} className={styles.task}>
             <div className={styles.details}>
               <h4>{task.title}</h4>
-              <p>Dificuldade: {task.difficulty}</p>
+              <p>Difficulty: {task.difficulty}</p>
             </div>
             <div className={styles.actions}>
               <i className="bi bi-pencil" onClick={() => handleEdit(task)}></i>
@@ -33,7 +33,7 @@ const TaskList = ({taskList, handleDelete, handleEdit}: Props) => {
           </div>
         ))
       ) : (
-        <p>Não há tarefas cadastradas!</p>
+        <p>There are no tasks registered!</p>
       )}
     </>
   )
