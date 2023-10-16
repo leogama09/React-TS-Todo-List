@@ -18,11 +18,11 @@ form {
 label {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1px;
+    margin-bottom: 1em;
 }
 
 label span {
-    margin-bottom: 3.em;
+    margin-bottom: 0.3em;
     font-weight: bold;
     text-align: left;
 }
@@ -53,6 +53,7 @@ textarea::placeholder {
     border: none;
     padding: 10px 15px;
     font-size: 1em;
+    margin-bottom: 2em;
 }
 
 .btn.btn-dark {
@@ -85,7 +86,7 @@ button[disabled] {
     background-color: #AAA;
 }
 
-.container .error {
+.error {
     color: #721c24;
     background-color: #F8D7DA;
     border: 1px solid #F5C6CB;
