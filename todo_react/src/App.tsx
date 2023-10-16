@@ -70,7 +70,6 @@ function App() {
           <TaskForm 
             btnText="Create Task" 
             taskList={taskList}
-            task={taskToUpdate}
             setTaskList={setTaskList} 
           />
 
