@@ -1,10 +1,13 @@
 import React, {useState, ChangeEvent, FormEvent, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuthValue } from '../context/AuthContext'
 
 // CSS
 import styles from './TaskForm.module.css'
 
 // Interface
 import { ITask } from "../interfaces/Task"
+import { useInsertDocument } from '../hooks/useInsertDocument'
 
 type Props = {
   btnText: string
@@ -25,6 +28,9 @@ const TaskForm = ({
   const [id, setId] = useState<number>(0)
   const [title, setTitle] = useState<string>("")
   const [difficulty, setDifficulty] = useState<number>(0)
+
+  const {insertDocument, response} = useInsertDocument("tasks")
+  const {user} = useAuthValue()
 
   useEffect(() => {
     if (task) {
@@ -57,6 +63,17 @@ const TaskForm = ({
     } else {
       setDifficulty(parseInt(e.target.value))
     }
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+
+    insertDocument ({
+      title,
+      difficulty,
+      uid: user.uid,
+      createdBy: user.displayName
+    })
   }
 
   return (

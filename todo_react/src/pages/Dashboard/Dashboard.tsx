@@ -6,10 +6,10 @@ import Modal from '../../components/Modal';
 
 // CSS
 import styles from './Dashboard.module.css';
-import TaskList from '../../components/TaskList';
 
 // Interface
 import { ITask } from '../../interfaces/Task';
+import TaskList from '../../components/TaskList';
 
 function Dashboard() {
   const [taskList, setTaskList] = useState<ITask[]>([])
