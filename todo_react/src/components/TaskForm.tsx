@@ -28,6 +28,7 @@ const TaskForm = ({
   const [id, setId] = useState<number>(0)
   const [title, setTitle] = useState<string>("")
   const [difficulty, setDifficulty] = useState<number>(0)
+  const [formError, setFormError] = useState("")
 
   const {insertDocument, response} = useInsertDocument("tasks")
   const {user} = useAuthValue()
@@ -42,6 +43,28 @@ const TaskForm = ({
 
   const addTaskHandler = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setFormError("")
+
+    // check values
+  if(!title || !difficulty) {
+    setFormError("Please, fill all fields!")
+  }
+
+  console.log({
+    title,
+    difficulty,
+    uid: user.uid,
+    createdBy: user.displayName
+  })
+
+  if(formError) return
+
+    insertDocument ({
+      title,
+      difficulty,
+      uid: user.uid,
+      createdBy: user.displayName
+    })
     
     if(handleUpdate) {
       handleUpdate(id, title, difficulty)
@@ -63,17 +86,6 @@ const TaskForm = ({
     } else {
       setDifficulty(parseInt(e.target.value))
     }
-  }
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
-
-    insertDocument ({
-      title,
-      difficulty,
-      uid: user.uid,
-      createdBy: user.displayName
-    })
   }
 
   return (
@@ -98,7 +110,14 @@ const TaskForm = ({
           value={difficulty}
         />
       </div>
-      <input type="submit" value={btnText} />
+      {!response.loading && <input type="submit" value={btnText} />}
+      {response.loading && (
+        <button className="btn" disabled>
+          Aguarde...
+        </button>
+      )}
+      {response.error && <p className="error">{response.error}</p>}
+      
     </form>
   )
 }
