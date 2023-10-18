@@ -11,7 +11,6 @@ import { AuthProvider } from './context/AuthContext';
 // Components
 import Footer from './components/Footer';
 import About from './pages/About/About';
-import Home from './pages/Home/Home';
 
 // CSS
 import styles from './App.module.css'
@@ -46,9 +45,8 @@ function App() {
           <BrowserRouter>
             <Navbar />
               <Routes>
-                <Route path='/' element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+                <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
                 <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
                 <Route path="/dashboard" element={<Dashboard />} />
               </Routes>

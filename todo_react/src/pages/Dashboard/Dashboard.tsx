@@ -1,4 +1,6 @@
+// hooks
 import React, {useState} from 'react';
+import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 
 // Components
 import TaskForm from '../../components/TaskForm';
@@ -10,8 +12,13 @@ import styles from './Dashboard.module.css';
 // Interface
 import { ITask } from '../../interfaces/Task';
 import TaskList from '../../components/TaskList';
+import { useAuthValue } from '../../context/AuthContext';
 
 function Dashboard() {
+  const {user} = useAuthValue()
+
+  // const {documents: tasks, loading} = useFetchDocuments("tasks", null, user.uid)
+
   const [taskList, setTaskList] = useState<ITask[]>([])
   const [taskToUpdate, setTaskToUpdate] = useState<(ITask | null)>(null)
 
