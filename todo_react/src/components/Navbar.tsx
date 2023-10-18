@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      <NavLink to="/login" className={styles.brand}>
+      <NavLink to="/" className={styles.brand}>
         <h1>Task Manager</h1>
       </NavLink>
       <ul className={styles.links_list}>
@@ -20,7 +20,7 @@ const Navbar = () => {
           <>
             <li>
               <NavLink 
-                to="/login"
+                to="/"
                 className={({isActive}) => (isActive ? styles.active : "")}
                 >Sign In</NavLink>
             </li>
