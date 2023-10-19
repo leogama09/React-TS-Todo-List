@@ -86,16 +86,16 @@ function Dashboard() {
             taskList={taskList}
             setTaskList={setTaskList} 
           />
-
         </div>
-        <div>
+        <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Search for a task..."
+          onChange={(e) => setQuery(e.target.value)}
         />
-        <button onSubmit={handleSubmit} className="btn btn-dark">Pesquisar</button>
+        <button className="btn btn-dark">Pesquisar</button>
 
-        </div>
+        </form>
         <div>
           <h2>Your tasks:</h2>
           <TaskList 

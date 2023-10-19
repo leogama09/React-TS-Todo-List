@@ -20,6 +20,7 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
+import Search from './pages/Search/Search';
 
 function App() {
 
@@ -46,7 +47,8 @@ function App() {
             <Navbar />
               <Routes>
                 <Route path="/about" element={<About />} />
-                <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
                 <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
                 <Route path="/dashboard" element={<Dashboard />} />
               </Routes>

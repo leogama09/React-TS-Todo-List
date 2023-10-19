@@ -33,7 +33,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
                 if (search) {
                     q = await query(
                         collectionRef, 
-                        where("title", "array-contains", search),
+                        where("title", "array-contains-any", search),
                         orderBy('createdAt', 'desc')
                     )
                 } else if (uid) {
