@@ -14,7 +14,7 @@ type Props = {
   taskList: ITask[]
   setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>
   task?: ITask | null
-  handleUpdate?(id: number, title: string, difficulty: number): void
+  handleUpdate?(id: number, title: string, description: string): void
 }
 
 const TaskForm = ({ 
@@ -27,7 +27,7 @@ const TaskForm = ({
 
   const [id, setId] = useState<number>(0)
   const [title, setTitle] = useState<string>("")
-  const [difficulty, setDifficulty] = useState<number>(0)
+  const [description, setDescription] = useState<string>("")
   const [formError, setFormError] = useState("")
 
   const {insertDocument, response} = useInsertDocument("tasks")
@@ -37,7 +37,7 @@ const TaskForm = ({
     if (task) {
     setId(task.id)
     setTitle(task.title)
-    setDifficulty(task.difficulty)
+    setDescription(task.description)
     }
   }, [task])
 
@@ -46,13 +46,13 @@ const TaskForm = ({
     setFormError("")
 
     // check values
-  if(!title || !difficulty) {
+  if(!title || !description) {
     setFormError("Please, fill all fields!")
   }
 
   console.log({
     title,
-    difficulty,
+    description,
     uid: user.uid,
     createdBy: user.displayName
   })
@@ -61,22 +61,22 @@ const TaskForm = ({
 
     insertDocument ({
       title,
-      difficulty,
+      description,
       uid: user.uid,
       createdBy: user.displayName
     })
     
     if(handleUpdate) {
-      handleUpdate(id, title, difficulty)
+      handleUpdate(id, title, description)
     } else {
       const id = Math.floor(Math.random() * 1000)
 
-      const newTask: ITask = {id, title, difficulty}
+      const newTask: ITask = {id, title, description}
 
       setTaskList!([...taskList, newTask])
 
       setTitle("")
-      setDifficulty(0)
+      setDescription("")
     }
   }
 
@@ -84,7 +84,7 @@ const TaskForm = ({
     if(e.target.name === "title") {
       setTitle(e.target.value)
     } else {
-      setDifficulty(parseInt(e.target.value))
+      setDescription(e.target.value)
     }
   }
 
@@ -101,13 +101,13 @@ const TaskForm = ({
         />
       </div>
       <div className={styles.input_container}>
-        <label htmlFor="difficulty">Difficulty:</label>
+        <label htmlFor="description">Description:</label>
         <input 
           type="text" 
-          name="difficulty" 
-          placeholder="Task difficulty"
+          name="description" 
+          placeholder="Task description"
           onChange={handleChange}
-          value={difficulty}
+          value={description}
         />
       </div>
       {!response.loading && <input type="submit" value={btnText} />}

@@ -1,6 +1,7 @@
 // hooks
 import React, {useState} from 'react';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
+import { useNavigate, Link } from 'react-router-dom';
 
 // Components
 import TaskForm from '../../components/TaskForm';
@@ -16,8 +17,6 @@ import { useAuthValue } from '../../context/AuthContext';
 
 function Dashboard() {
   const {user} = useAuthValue()
-
-  // const {documents: tasks, loading} = useFetchDocuments("tasks", null, user.uid)
 
   const [taskList, setTaskList] = useState<ITask[]>([])
   const [taskToUpdate, setTaskToUpdate] = useState<(ITask | null)>(null)
@@ -44,9 +43,9 @@ function Dashboard() {
     setTaskToUpdate(task)
   }
 
-  const updateTask = (id: number, title: string, difficulty: number) => {
+  const updateTask = (id: number, title: string, description: string) => {
 
-    const updatedTask: ITask = {id, title, difficulty}
+    const updatedTask: ITask = {id, title, description}
 
     const updatedItens = taskList.map((task) => {
       return task.id === updatedTask.id ? updatedTask : task
@@ -55,8 +54,18 @@ function Dashboard() {
     setTaskList(updatedItens)
 
     hideOrShowModal(false)
-
   }
+
+  const [query, setQuery] = useState("")
+  const navigate = useNavigate()
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+
+    if (query) {
+        return navigate(`/search?q=${query}`)
+    }
+}
 
   return (
       <div>
@@ -68,6 +77,7 @@ function Dashboard() {
             handleUpdate={updateTask}
             />}
         />
+
         <main className={styles.main}>
         <div>
           <h2>What will you do?</h2>
@@ -76,6 +86,14 @@ function Dashboard() {
             taskList={taskList}
             setTaskList={setTaskList} 
           />
+
+        </div>
+        <div>
+        <input
+          type="text"
+          placeholder="Search for a task..."
+        />
+        <button onSubmit={handleSubmit} className="btn btn-dark">Pesquisar</button>
 
         </div>
         <div>
